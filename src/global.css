@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    --fontDefault: 0, 0%, 30.2%;
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;
     --card: 0 0% 100%;
@@ -32,6 +33,7 @@
   }
 
   .dark {
+    --fontDefault: 0, 0%, 95%;
     --background: 224 71.4% 4.1%;
     --foreground: 210 20% 98%;
     --card: 224 71.4% 4.1%;
@@ -64,7 +66,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-body leading-relaxed;
+    @apply bg-background text-fontDefault font-body leading-relaxed;
   }
   h1 {
     @apply text-3xl sm:text-4xl xl:text-5xl;
