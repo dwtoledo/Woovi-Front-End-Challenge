@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { getPaymentDetails } from "../models/Payments"
 import { paymentDetailsRequest } from "../models/MockedData"
 import { usePaymentDetails } from "../layouts/DefaultLayout"
@@ -14,6 +14,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 
 export function PaymentMethod() {
   const { paymentDetails, setPaymentDetails } = usePaymentDetails()
+  const [optionChecked, setOptionChecked] = useState<boolean>(false)
 
   useEffect(() => {
     handleGetPaymentDetails()
@@ -21,6 +22,10 @@ export function PaymentMethod() {
 
   async function handleGetPaymentDetails() {
     setPaymentDetails(await getPaymentDetails(paymentDetailsRequest))
+  }
+
+  function handleOptionCheck(event: boolean) {
+    setOptionChecked(event)
   }
 
   return (
@@ -38,7 +43,7 @@ export function PaymentMethod() {
         <CardHeader className="pb-3">
           <CardTitle className="flex justify-between">
             <span><strong>1x</strong> R$ 30.500,00</span>
-            <Checkbox />
+            <Checkbox onCheckedChange={handleOptionCheck} checked={optionChecked}/>
           </CardTitle>
           <CardDescription className="text-primary">
             Ganhe 3% de Cashback
