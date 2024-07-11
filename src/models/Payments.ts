@@ -1,6 +1,6 @@
-import axios, { AxiosResponse } from 'axios'
 import { User } from "./Users";
 import { paymentDetailsResponse } from './MockedData';
+//import axios, { AxiosResponse } from 'axios'
 
 interface Installment {
   id: string;
@@ -11,7 +11,7 @@ interface Installment {
   totalEffectiveCost: number;
 }
 
-interface Payment {
+export interface Payment {
   id: string;
   total: number;
   cashback: number;
