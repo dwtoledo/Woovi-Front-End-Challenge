@@ -1,32 +1,32 @@
-import { User } from "./Users";
-import { paymentDetailsResponse } from './MockedData';
+import { User } from "./Users"
+import { paymentDetailsResponse } from './MockedData'
 //import axios, { AxiosResponse } from 'axios'
 
-interface Installment {
-  id: string;
-  installment: number;
-  value: number;
-  total: number;
-  isBestOption: boolean;
-  totalEffectiveCost: number;
+export interface Installment {
+  id: string
+  installment: number
+  value: number
+  total: number
+  isBestOption: boolean
+  totalEffectiveCost: number
 }
 
 export interface Payment {
-  id: string;
-  total: number;
-  cashback: number;
-  pixReturn: number;
-  installments: Array<Installment>;
+  id: string
+  total: number
+  cashback: number
+  pixReturn: number
+  installments: Array<Installment>
 }
 
 interface PaymentRequest {
-  userId: string;
-  totalPayment: number;
+  userId: string
+  totalPayment: number
 }
 
 export interface PaymentDetails {
-  user: User;
-  payment: Payment;
+  user: User
+  payment: Payment
 }
 
 export async function getPaymentDetails(
@@ -38,7 +38,7 @@ export async function getPaymentDetails(
     //return response.data
     return paymentDetailsResponse
   } catch (error) {
-    alert(`Erro ao solicitar os detalhes do pagamento: ${error}`);
-    throw error;
+    alert(`Erro ao solicitar os detalhes do pagamento: ${error}`)
+    throw error
   }
 }

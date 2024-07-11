@@ -18,7 +18,7 @@ module.exports = {
     },
     extend: {
       screens: {
-        'xs': {'max': '425px'},
+        'xs': {'max': '460px'},
       },
       fontFamily: {
         body: ['Nunito', 'sans-serif'],
