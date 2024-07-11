@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Checkbox } from "@/components/ui/checkbox"
 
 export function PaymentMethod() {
   const { paymentDetails, setPaymentDetails } = usePaymentDetails()
@@ -35,8 +36,9 @@ export function PaymentMethod() {
           Pix
         </Badge>
         <CardHeader className="pb-3">
-          <CardTitle>
-            <strong>1x</strong> R$ 30.500,00
+          <CardTitle className="flex justify-between">
+            <span><strong>1x</strong> R$ 30.500,00</span>
+            <Checkbox />
           </CardTitle>
           <CardDescription className="text-primary">
             Ganhe 3% de Cashback
