@@ -17,6 +17,9 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        'xs': {'max': '425px'},
+      },
       fontFamily: {
         body: ['Nunito', 'sans-serif'],
         display: ['Nunito', 'sans-serif'],
@@ -27,6 +30,7 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         fontDefault: "hsl(var(--fontDefault))",
+        button: "hsl(var(--button))",
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
