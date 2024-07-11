@@ -1,3 +1,10 @@
+import { RouterProvider } from "react-router-dom"
+import { Router } from './Router'
+
 export function App() {
-  return <h1>Hello Woovi Challenge</h1>
+  return (
+    <>
+      <RouterProvider router={Router} />
+    </>
+  )
 }
