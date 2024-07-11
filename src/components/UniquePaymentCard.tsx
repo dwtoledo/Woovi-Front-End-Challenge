@@ -35,7 +35,13 @@ export function UniquePaymentCard({ payment, title }: UniquePaymentCardProps) {
   }
 
   return (
-    <Card className="max-w-md relative shadow-none">
+    <Card
+      className="max-w-md relative shadow-none border-2"
+      style={{
+        borderColor: optionChecked ? "hsl(var(--primary))" : "",
+        backgroundColor: optionChecked ? "hsla(var(--primary), 0.05)" : "",
+      }}
+    >
       {title ? getTitleBadge() : null}
       <CardHeader className="pb-3">
         <CardTitle className="flex justify-between">
@@ -58,7 +64,18 @@ export function UniquePaymentCard({ payment, title }: UniquePaymentCardProps) {
         <p className="relative bg-button text-white flex-1 pl-3 pr-8 py-1 rounded-l-md xs:rounded-md xs:pr-4">
           <strong>🤑 {brazilBRL.format(payment.pixReturn)}</strong> de volta no
           seu Pix na hora
-          <span className="absolute inset-0 right-0 top-0 border-t-[1rem] border-t-transparent border-r-[1rem] border-r-background border-b-[1rem] border-b-transparent xs:hidden"></span>
+          <span
+            className="absolute inset-0 right-0 top-0 border-t-[1rem] border-t-transparent border-r-[1rem] border-r-background border-b-[1rem] border-b-transparent xs:hidden"
+            style={{
+              borderRightColor: optionChecked
+                ? "hsla(var(--background))"
+                : "",
+            }}
+          ></span>
+          {optionChecked && (<span
+            className="absolute inset-0 right-0 top-0 border-t-[1rem] border-t-transparent border-r-[1rem] border-r-background border-b-[1rem] border-b-transparent xs:hidden"
+            style={{borderRightColor: "hsla(var(--primary), 0.05)"}}
+          ></span>)}
         </p>
       </CardFooter>
     </Card>
