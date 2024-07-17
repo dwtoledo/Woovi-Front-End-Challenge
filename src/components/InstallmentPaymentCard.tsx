@@ -1,21 +1,22 @@
-import { useState } from "react";
-import { Installment } from "../models/Payments";
-import { brazilBRL } from "../models/Currency";
-import { Badge } from "./ui/badge";
-import { Checkbox } from "./ui/checkbox";
+import { Installment } from "../models/Payments"
+import { brazilBRL } from "../models/Currency"
+import { Badge } from "./ui/badge"
+import { Checkbox } from "./ui/checkbox"
 import {
   Card,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "./ui/card"
 
 interface InstallmentPaymentCardProps {
-  installment: Installment;
-  title?: string;
-  isFirstInstallment: boolean;
-  isLastInstallment: boolean;
+  installment: Installment
+  title?: string
+  isFirstInstallment: boolean
+  isLastInstallment: boolean
+  isChecked: boolean
+  onSelect: (status: boolean, installmentId: string) => void
 }
 
 export function InstallmentPaymentCard({
@@ -23,11 +24,12 @@ export function InstallmentPaymentCard({
   title,
   isFirstInstallment,
   isLastInstallment,
+  isChecked,
+  onSelect,
 }: InstallmentPaymentCardProps) {
-  const [optionChecked, setOptionChecked] = useState<boolean>(false);
 
-  function handleOptionCheck(event: boolean) {
-    setOptionChecked(event);
+  function handleOptionCheck(status: boolean) {
+    onSelect(status, installment.id)
   }
 
   function getTitleBadge() {
@@ -38,7 +40,7 @@ export function InstallmentPaymentCard({
       >
         {title}
       </Badge>
-    );
+    )
   }
 
   function getFooterMessage() {
@@ -51,17 +53,17 @@ export function InstallmentPaymentCard({
           <strong>-3% de juros:</strong> Melhor opção de parcelamento
           <span className="absolute inset-0 right-0 top-0 border-t-[1rem] border-t-transparent border-r-[1rem] border-r-background border-b-[1rem] border-b-transparent xs:hidden"
           style={{
-            borderRightColor: optionChecked
+            borderRightColor: isChecked
               ? "hsla(var(--background))"
               : "",
           }}></span>
-          {optionChecked && (<span
+          {isChecked && (<span
             className="absolute inset-0 right-0 top-0 border-t-[1rem] border-t-transparent border-r-[1rem] border-r-background border-b-[1rem] border-b-transparent xs:hidden"
             style={{borderRightColor: "hsla(var(--primary), 0.05)"}}
           ></span>)}
         </p>
       </CardFooter>
-    );
+    )
   }
 
   return (
@@ -88,9 +90,9 @@ export function InstallmentPaymentCard({
           : isFirstInstallment
           ? ""
           : "0px",
-        borderBottom: !isLastInstallment && !optionChecked ? "0px" : "",
-        borderColor: optionChecked ? "hsl(var(--primary))" : "",
-        backgroundColor: optionChecked ? "hsla(var(--primary), 0.05)" : "",
+        borderBottom: !isLastInstallment && !isChecked ? "0px" : "",
+        borderColor: isChecked ? "hsl(var(--primary))" : "",
+        backgroundColor: isChecked ? "hsla(var(--primary), 0.05)" : "",
       }}
     >
       {title ? getTitleBadge() : null}
@@ -102,7 +104,7 @@ export function InstallmentPaymentCard({
           </span>
           <Checkbox
             onCheckedChange={handleOptionCheck}
-            checked={optionChecked}
+            checked={isChecked}
           />
         </CardTitle>
         <CardDescription>
@@ -111,5 +113,5 @@ export function InstallmentPaymentCard({
       </CardHeader>
       {installment.isBestOption && getFooterMessage()}
     </Card>
-  );
+  )
 }

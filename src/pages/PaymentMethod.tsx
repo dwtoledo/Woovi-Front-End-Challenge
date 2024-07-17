@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { getPaymentDetails, Installment } from "../models/Payments"
 import { paymentDetailsRequest } from "../models/MockedData"
 import { usePaymentDetails } from "../layouts/DefaultLayout"
@@ -7,6 +7,7 @@ import { UniquePaymentCard } from "../components/UniquePaymentCard"
 
 export function PaymentMethod() {
   const { paymentDetails, setPaymentDetails } = usePaymentDetails()
+  const [ selectedPaymentId, setSelectedPaymentId ] = useState<string | null>(null)
 
   useEffect(() => {
     handleGetPaymentDetails()
@@ -14,6 +15,22 @@ export function PaymentMethod() {
 
   async function handleGetPaymentDetails() {
     setPaymentDetails(await getPaymentDetails(paymentDetailsRequest))
+  }
+
+  function handleUniquePaymentSelection(status: boolean, paymentId: string) {
+    if (!status) {
+      setSelectedPaymentId(null)
+    } else {
+      setSelectedPaymentId(paymentId)
+    }
+  }
+
+  function handleInstallmentPaymentSelection(status: boolean, installmentId: string) {
+    if (!status) {
+      setSelectedPaymentId(null)
+    } else {
+      setSelectedPaymentId(installmentId)
+    }
   }
 
   function isFirstInstallment (installment: Installment) {
@@ -35,6 +52,8 @@ export function PaymentMethod() {
           title={ isFirstInstallment(installment) ? "Pix Parcelado" : ""}
           isFirstInstallment={isFirstInstallment(installment)}
           isLastInstallment={isLastInstallment(installment)}
+          onSelect={handleInstallmentPaymentSelection}
+          isChecked={selectedPaymentId === installment.id}
         />
       )
     })
@@ -48,7 +67,7 @@ export function PaymentMethod() {
 
       <div className="flex flex-col gap-8">
         {paymentDetails && (
-          <UniquePaymentCard payment={paymentDetails.payment} title="Pix" />
+          <UniquePaymentCard payment={paymentDetails.payment} title="Pix" onSelect={handleUniquePaymentSelection} isChecked={selectedPaymentId === paymentDetails.payment.id} />
         )}
         <div>{paymentDetails && getInstallmentPaymentCards()}</div>
       </div>

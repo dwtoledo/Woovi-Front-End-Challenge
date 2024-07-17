@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Payment } from "../models/Payments"
 import { brazilBRL } from "../models/Currency"
 import { Checkbox } from "./ui/checkbox"
@@ -14,13 +13,15 @@ import { Badge } from "./ui/badge"
 interface UniquePaymentCardProps {
   payment: Payment
   title?: string
+  isChecked: boolean
+  onSelect: (status: boolean, paymentId: string) => void
+
 }
 
-export function UniquePaymentCard({ payment, title }: UniquePaymentCardProps) {
-  const [optionChecked, setOptionChecked] = useState<boolean>(false)
+export function UniquePaymentCard({ payment, title, isChecked, onSelect }: UniquePaymentCardProps) {
 
-  function handleOptionCheck(event: boolean) {
-    setOptionChecked(event)
+  function handleOptionCheck(status: boolean) {
+    onSelect(status, payment.id)
   }
 
   function getTitleBadge() {
@@ -38,8 +39,8 @@ export function UniquePaymentCard({ payment, title }: UniquePaymentCardProps) {
     <Card
       className="max-w-md relative shadow-none border-2"
       style={{
-        borderColor: optionChecked ? "hsl(var(--primary))" : "",
-        backgroundColor: optionChecked ? "hsla(var(--primary), 0.05)" : "",
+        borderColor: isChecked ? "hsl(var(--primary))" : "",
+        backgroundColor: isChecked ? "hsla(var(--primary), 0.05)" : "",
       }}
     >
       {title ? getTitleBadge() : null}
@@ -51,7 +52,8 @@ export function UniquePaymentCard({ payment, title }: UniquePaymentCardProps) {
           </span>
           <Checkbox
             onCheckedChange={handleOptionCheck}
-            checked={optionChecked}
+            checked={isChecked}
+            
           />
         </CardTitle>
         <CardDescription>
@@ -67,12 +69,12 @@ export function UniquePaymentCard({ payment, title }: UniquePaymentCardProps) {
           <span
             className="absolute inset-0 right-0 top-0 border-t-[1rem] border-t-transparent border-r-[1rem] border-r-background border-b-[1rem] border-b-transparent xs:hidden"
             style={{
-              borderRightColor: optionChecked
+              borderRightColor: isChecked
                 ? "hsla(var(--background))"
                 : "",
             }}
           ></span>
-          {optionChecked && (<span
+          {isChecked && (<span
             className="absolute inset-0 right-0 top-0 border-t-[1rem] border-t-transparent border-r-[1rem] border-r-background border-b-[1rem] border-b-transparent xs:hidden"
             style={{borderRightColor: "hsla(var(--primary), 0.05)"}}
           ></span>)}
