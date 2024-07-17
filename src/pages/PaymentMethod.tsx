@@ -4,10 +4,15 @@ import { paymentDetailsRequest } from "../models/MockedData"
 import { usePaymentDetails } from "../layouts/DefaultLayout"
 import { InstallmentPaymentCard } from "../components/InstallmentPaymentCard"
 import { UniquePaymentCard } from "../components/UniquePaymentCard"
+import { Button } from "../components/ui/button"
+import { CircleDollarSign } from "lucide-react"
+import { Link } from "react-router-dom"
 
 export function PaymentMethod() {
   const { paymentDetails, setPaymentDetails } = usePaymentDetails()
-  const [ selectedPaymentId, setSelectedPaymentId ] = useState<string | null>(null)
+  const [selectedPaymentId, setSelectedPaymentId] = useState<string | null>(
+    null
+  )
 
   useEffect(() => {
     handleGetPaymentDetails()
@@ -25,7 +30,10 @@ export function PaymentMethod() {
     }
   }
 
-  function handleInstallmentPaymentSelection(status: boolean, installmentId: string) {
+  function handleInstallmentPaymentSelection(
+    status: boolean,
+    installmentId: string
+  ) {
     if (!status) {
       setSelectedPaymentId(null)
     } else {
@@ -33,13 +41,13 @@ export function PaymentMethod() {
     }
   }
 
-  function isFirstInstallment (installment: Installment) {
+  function isFirstInstallment(installment: Installment) {
     return installment.installment === 2
   }
 
-  function isLastInstallment (installment: Installment) {
+  function isLastInstallment(installment: Installment) {
     if (!paymentDetails?.payment?.installments) return false
-    const installmentsNumber = paymentDetails.payment.installments.length + 1    
+    const installmentsNumber = paymentDetails.payment.installments.length + 1
     return installment.installment === installmentsNumber
   }
 
@@ -49,7 +57,7 @@ export function PaymentMethod() {
         <InstallmentPaymentCard
           key={installment.id}
           installment={installment}
-          title={ isFirstInstallment(installment) ? "Pix Parcelado" : ""}
+          title={isFirstInstallment(installment) ? "Pix Parcelado" : ""}
           isFirstInstallment={isFirstInstallment(installment)}
           isLastInstallment={isLastInstallment(installment)}
           onSelect={handleInstallmentPaymentSelection}
@@ -67,9 +75,24 @@ export function PaymentMethod() {
 
       <div className="flex flex-col gap-8">
         {paymentDetails && (
-          <UniquePaymentCard payment={paymentDetails.payment} title="Pix" onSelect={handleUniquePaymentSelection} isChecked={selectedPaymentId === paymentDetails.payment.id} />
+          <UniquePaymentCard
+            payment={paymentDetails.payment}
+            title="Pix"
+            onSelect={handleUniquePaymentSelection}
+            isChecked={selectedPaymentId === paymentDetails.payment.id}
+          />
         )}
         <div>{paymentDetails && getInstallmentPaymentCards()}</div>
+
+        <Button asChild={!!selectedPaymentId} disabled={!selectedPaymentId} className="hover:bg-button">
+          <Link
+            to={`/pix-credit-card/${selectedPaymentId}`}
+            className="flex gap-2 items-center justify-center"
+          >
+            <CircleDollarSign />
+            <span className="text-lg">Pagar</span>
+          </Link>
+        </Button>
       </div>
     </main>
   )
