@@ -5,7 +5,9 @@ This project is a front end code challenge from Woovi. It simulates 3 mobile fir
 - The second screen is the first payment step (in case of "installments" selection), or the prompt payment (in case of "unique payment" selection);
 - The third screen is a credit card form for the final payment step (in case of "installments" selection).
   
-The values is populated with fictional data. The project uses various React features such as components, contexts, props, states, routes, and more. Styling is done with Tailwind CSS using Shadcn UI components library.
+The values is populated with fictional data.
+
+The project uses various React features such as components, contexts, props, states, routes, and more. Styling is done with Tailwind CSS using Shadcn UI components library. Axios is used to fetch async data (mocked in this example).
 
 ## Layout:
 
