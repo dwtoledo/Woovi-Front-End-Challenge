@@ -11,7 +11,7 @@ The project uses various React features such as components, contexts, props, sta
 
 ## Layout:
 
-<img width="640" alt="github" src="teste">
+<img width="640" alt="github" src="https://github.com/user-attachments/assets/a89d20a7-0427-4c41-a57c-fa7f19d08ebd">
 
 ## How to view the project:
 
