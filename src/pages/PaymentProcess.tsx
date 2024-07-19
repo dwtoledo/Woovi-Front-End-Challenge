@@ -62,10 +62,17 @@ export function PaymentProcess() {
     try {
       if (transactionDetails) {
         await navigator.clipboard.writeText(transactionDetails.qrCode)
-        toast({ description: "QR Code copiado para a área de transferência!" })
+        toast({
+          title: "Sucesso!",
+          description: "QR Code copiado para a área de transferência!",
+        })
       }
-    } catch (error) {
-      console.error("Falha ao copiar o texto: ", error)
+    } catch {
+      toast({
+        title: "Erro!",
+        description: "Erro ao copiar o QR Code para a área de transferência!",
+        variant: "destructive",
+      })
     }
   }
 
