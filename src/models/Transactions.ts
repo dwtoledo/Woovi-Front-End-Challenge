@@ -12,6 +12,7 @@ export interface TransactionDetails {
   paymentId: string,
   transactionId: string,
   qrCode: string,
+  qrCodeImage: string,
   deadline: string
 }
 

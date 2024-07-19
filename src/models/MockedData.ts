@@ -72,6 +72,6 @@ export const transactionDetailsResponse = {
   "paymentId": "a4ad6270-32b3-4494-9ed0-2ec42eaeabc0",
   "transactionId": "2c1b951f356c4680b13ba1c9fc889c47",
   "qrCode": "PIX QR CODE",
-  "qrCodeImage": "../../assets/icon.png",
+  "qrCodeImage": "https://raw.githubusercontent.com/dwtoledo/Woovi-Front-End-Challenge/main/src/assets/images/qr-code.svg",
   "deadline": "2021-12-15T08:17:00Z"
 }

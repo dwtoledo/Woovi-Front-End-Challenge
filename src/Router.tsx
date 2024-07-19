@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { DefaultLayout } from './layouts/DefaultLayout'
 import { PaymentMethod } from './pages/PaymentMethod'
-import { PixCreditCardMethod } from './pages/PixCreditCardMethod'
+import { PaymentProcess } from './pages/PaymentProcess'
 import { PageNotFound } from './pages/PageNotFound'
 
 
@@ -16,8 +16,8 @@ export const Router = createBrowserRouter([
         element: <PaymentMethod />,
       },
       {
-        path: '/pix-credit-card/:paymentId',
-        element: <PixCreditCardMethod />,
+        path: '/process/:paymentId',
+        element: <PaymentProcess />,
       },
     ],
   },

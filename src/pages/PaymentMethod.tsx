@@ -86,7 +86,7 @@ export function PaymentMethod() {
 
         <Button asChild={!!selectedPaymentId} disabled={!selectedPaymentId} className="hover:bg-button">
           <Link
-            to={`/pix-credit-card/${selectedPaymentId}`}
+            to={`/process/${selectedPaymentId}`}
             className="flex gap-2 items-center justify-center"
           >
             <CircleDollarSign />
