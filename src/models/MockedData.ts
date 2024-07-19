@@ -66,3 +66,12 @@ export const paymentDetailsResponse = {
     ]
   }
 }
+
+export const transactionDetailsResponse = {
+  "userId": "7670e3c0-438a-4053-a174-7ccb5d7e00a7",
+  "paymentId": "a4ad6270-32b3-4494-9ed0-2ec42eaeabc0",
+  "transactionId": "2c1b951f356c4680b13ba1c9fc889c47",
+  "qrCode": "PIX QR CODE",
+  "qrCodeImage": "../../assets/icon.png",
+  "deadline": "2021-12-15T08:17:00Z"
+}
