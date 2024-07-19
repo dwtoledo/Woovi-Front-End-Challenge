@@ -7,6 +7,9 @@ import {
   TransactionDetails,
   TransactionRequest,
 } from "../models/Transactions"
+import { Button } from "../components/ui/button"
+
+import QRCodeBttnIcon from "../assets/icons/doc-icon.svg"
 
 export function PaymentProcess() {
   const { paymentId } = useParams()
@@ -52,16 +55,33 @@ export function PaymentProcess() {
     )
   }
 
+  async function copyQRCodeToClipboard () {
+    try {
+      if (transactionDetails) {
+        await navigator.clipboard.writeText(transactionDetails.qrCode)
+        alert('Texto copiado para a área de transferência!')
+      }
+    } catch (error) {
+      console.error('Falha ao copiar o texto: ', error)
+    }
+  }
+
   return (
     <main className="flex flex-col px-4 items-center justify-center">
       {getPaymentMessage()}
 
       {transactionDetails && (
-        <img
-          src={transactionDetails.qrCodeImage}
-          alt="QR Code for payment"
-          className="max-h-[332px] aspect-square p-2 border-2 border-primary rounded-lg"
-        />
+        <>
+          <img
+            src={transactionDetails.qrCodeImage}
+            alt="QR Code for payment"
+            className="max-h-[332px] aspect-square p-2 border-2 border-primary rounded-lg"
+          />
+          <Button onClick={copyQRCodeToClipboard} className="flex justify-center items-center gap-2 mt-5 bg-button text-lg hover:bg-button hover:opacity-90">
+            <span>Clique para copiar QR CODE</span>
+            <img src={QRCodeBttnIcon} alt="Icone de copiar" className="h-4" />
+          </Button>
+        </>
       )}
     </main>
   )
