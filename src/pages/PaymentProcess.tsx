@@ -1,17 +1,19 @@
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { formatInTimeZone } from "date-fns-tz"
+
 import { usePaymentDetails } from "../layouts/DefaultLayout"
 import { brazilBRL } from "../models/Currency"
-import { useEffect, useState } from "react"
+
+import { Button } from "../components/ui/button"
+import { useToast } from "../components/ui/use-toast"
 import {
   getTransactionDetails,
   TransactionDetails,
   TransactionRequest,
 } from "../models/Transactions"
-import { Button } from "../components/ui/button"
 
 import QRCodeBttnIcon from "../assets/icons/doc-icon.svg"
-import { useToast } from "../components/ui/use-toast"
-import { ToastAction } from "../components/ui/toast"
 
 export function PaymentProcess() {
   const { toast } = useToast()
@@ -94,6 +96,17 @@ export function PaymentProcess() {
             <span>Clique para copiar QR CODE</span>
             <img src={QRCodeBttnIcon} alt="Icone de copiar" className="h-4" />
           </Button>
+
+          <div className="mt-5">
+            <p className="text-muted-foreground">Prazo de pagamento:</p>
+            <p className="font-extrabold">
+              {formatInTimeZone(
+                transactionDetails.deadline,
+                "America/Sao_Paulo",
+                "dd/MM/yyyy - HH:mm"
+              )}
+            </p>
+          </div>
         </>
       )}
     </main>
