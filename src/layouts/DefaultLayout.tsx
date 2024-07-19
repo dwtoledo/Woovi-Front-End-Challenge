@@ -3,6 +3,7 @@ import { Header } from "../components/Header"
 import { Footer } from "../components/Footer"
 import { useState } from "react"
 import { PaymentDetails } from "../models/Payments"
+import { Toaster } from "../components/ui/toaster"
 
 type PaymentDetailsContextType = { 
   paymentDetails: PaymentDetails | null
@@ -16,6 +17,7 @@ export function DefaultLayout() {
     <>
       <Header />
       <Outlet context={{ paymentDetails, setPaymentDetails } satisfies PaymentDetailsContextType} />
+      <Toaster />
       <Footer />
     </>
   )
